@@ -11,15 +11,7 @@ What reviewers should expect:
       
     
 *   Later runs appear only after their training starts  
-    
-# **Do not assume missing runs mean failure.**
-## **All 8 runs will appear once their training begins and logs are written.**
-
-## **After running the cell below, DO NOT run the next cells immediately.**
-## **Wait 3–5 minutes. Metrics take time to appear.**
-
-### **Seeing only a few runs at first is expected.**
-    
+      
 *   # **It is normal to**:  
 
     *   **wait 5-10 minutes after launching TensorBoard**
@@ -27,7 +19,6 @@ What reviewers should expect:
     *   initially see metrics for only some runs
     *   see sparse curves early in a run
 
-    
 *   The final metrics table is extracted directly from TensorBoard event files and represents the authoritative comparison across all runs     
     
 * * *

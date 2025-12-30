@@ -1,31 +1,34 @@
-# ⚠️ Important Note on TensorBoard Metrics Visibility (Expected Behavior)
+# ⚠️ Please read before proceeding.
 
-Because this notebook runs multiple SFT configurations sequentially on free-tier Google Colab hardware, TensorBoard metrics appear incrementally over time. This is expected and correct behavior, not a logging issue.
-
+This notebook runs multiple SFT configurations sequentially on free-tier Google Colab.
+Because of this, TensorBoard metrics appear gradually over time. This is normal and expected, not a logging issue.
 What reviewers should expect:
 
 *   Each SFT run writes TensorBoard event files only after training begins  
       
     
-*   Runs execute one after another for stability (not in parallel)  
+*   Early runs appear first in TensorBoard  
       
     
-*   Early runs appear first in TensorBoard; later runs appear after refresh  
+*   Later runs appear only after their training starts  
       
-*   It is normal to:  
+*   # **It is normal to**:  
 
-    *   refresh TensorBoard during or after training  
-    *   see additional runs appear progressively  
-    *   observe sparse or delayed metrics early in a run until logging steps are reached
+    *   **wait 5-10 minutes after launching TensorBoard**
+    *   **refresh TensorBoard (You SHOULD see the refresh button within the tensorboard portal itself)**
+    *   initially see metrics for only some runs
+    *   see sparse curves early in a run
+# **Do not assume missing runs mean failure.**
+## **All 8 runs will appear once their training begins and logs are written.**
 
-      
+## **After running the cell below, DO NOT run the next cells immediately.**
+## **Wait 3–5 minutes. Metrics take time to appear.**
+
+### **Seeing only a few runs at first is expected.**
     
 
 *   The final metrics table is extracted directly from TensorBoard event files and represents the authoritative comparison across all runs     
     
-
-This design ensures reproducibility, stability, and complete logging on constrained hardware, mirroring how real teams run controlled fine-tuning experiments.
-
 * * *
 
 

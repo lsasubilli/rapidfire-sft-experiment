@@ -167,14 +167,15 @@ Key decisions:
 
 ### 1) TensorBoard — Train Loss across all 8 runs
 <img src="./screenshots/tensorboard_TRAIN_LOSS.png" width="950" />
-### 2) TensorBoard — Loss across all 8 runs
 
+### 2) TensorBoard — Loss across all 8 runs
 <img src="./screenshots/tensorboard_LOSS.png" width="950" />
 
 **What this shows**
-- All runs **learn** (loss decreases), but at different rates and final values.
-- **Run 2 and Run 4** converge to the **lowest training loss**, indicating stronger fit under identical step budgets.
-- Higher-final-loss runs (e.g., Runs 5/7) likely reflect weaker config choices for this tiny slice.
+- All runs **learn** (training loss consistently decreases), confirming that each configuration is trainable under the same step and compute budget.
+- Different convergence speeds highlight the impact of **model choice, prompt formatting, and LoRA capacity** on optimization dynamics.
+- **Run 2 and Run 4** reach the **lowest final training loss**, suggesting stronger fit to the training slice under identical conditions.
+- Runs with higher final loss (e.g., Runs 5/7) indicate weaker or less stable configuration choices for this small dataset, rather than logging or runtime issues.
 
 ---
 
@@ -182,9 +183,10 @@ Key decisions:
 <img src="./screenshots/tensorboard_MEAN_TOKEN_ACCURACY.png" width="950" />
 
 **What this shows**
-- Mean token accuracy **rises steadily** for most runs → stable training signal (no collapse).
-- The ranking aligns with eval outcomes: **Run 2/4 are top**, Runs 5/7 are bottom.
-- This metric is useful as a fast, deterministic “training health” indicator when you’re avoiding LLM judges.
+- Mean token accuracy **increases steadily** for most runs, indicating stable learning without collapse or degenerate behavior.
+- Early divergence in curves reflects how quickly different configurations align with the target instruction format.
+- The relative ordering of runs mirrors eval metrics: **Run 2 and Run 4 perform best**, while Runs 5/7 trail, reinforcing consistency across signals.
+- This metric serves as a fast, deterministic **training health check** when avoiding subjective or LLM-based evaluation.
 
 ---
 
@@ -192,8 +194,10 @@ Key decisions:
 <img src="./screenshots/metric_table.png" width="950" />
 
 **What this shows**
-- This table is extracted programmatically from event files → **no manual TensorBoard inspection required**.
-- It enables clean reporting + CSV export for comparisons.
+- Final scalar values are extracted **directly from TensorBoard event files**, ensuring the table reflects exactly what was logged during training.
+- This removes the need for manual curve inspection or cherry-picking results.
+- The table enables clean side-by-side comparison across all configurations and supports **CSV export** for downstream analysis or reporting.
+- Because all values come from a single logging source, this table is the **authoritative comparison artifact** for the experiment.
 
 ---
 
@@ -202,8 +206,36 @@ Key decisions:
 <img src="./screenshots/eval_loss_all_configs.png" width="750" />
 
 **What this shows**
-- A compact “scoreboard” view of **final training vs eval loss** per run.
-- Helps reviewers see the winner without scrolling TensorBoard.
+- A compact “scoreboard” view summarizing **final training loss vs final eval loss** for each configuration.
+- Makes tradeoffs visible at a glance (e.g., strong training fit vs weaker generalization).
+- Helps reviewers quickly identify the strongest-performing runs without scrolling through TensorBoard curves.
+- Useful as a lightweight summary artifact when communicating results to stakeholders who do not need full training traces.
+
+
+## 6) Metric Correlation Heatmap — Feature Importance Insight
+
+<img src="./screenshots/metric_correlation.png" width="950" />
+
+**What this shows**
+
+This heatmap visualizes the **pairwise correlations between logged training, evaluation, and system metrics** across all SFT runs. It provides a compact, post-hoc view of how different signals move together during fine-tuning.
+
+Key insights:
+
+* **Train loss, eval loss, and mean token accuracy are strongly anti-correlated**, confirming that improvements in optimization directly translate to better evaluation behavior in this setup.
+* **Throughput metrics** (train/eval samples per second, steps per second) are tightly correlated with each other and inversely correlated with runtime, as expected on fixed hardware.
+* **Grad norm correlates strongly with loss**, indicating that gradient magnitude is a useful proxy for optimization dynamics in small-model SFT.
+* **Token-count–related metrics** correlate weakly with quality metrics, suggesting that performance differences are driven more by configuration choices (model, prompt scheme, LoRA) than by sequence length effects.
+* **Total FLOPs correlate with runtime and throughput**, validating that compute accounting is consistent across runs.
+
+Why this matters for experimentation:
+
+* It helps **sanity-check metrics** (no unexpected or contradictory relationships).
+* It highlights which metrics are **redundant vs complementary**, guiding what to monitor in future experiments.
+* It reinforces that the final comparison table is grounded in internally consistent signals logged to TensorBoard.
+
+This mirrors how real teams inspect experiment telemetry to understand not just *which* configuration won, but *why*.
+
 
 ---
 

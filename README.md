@@ -11,13 +11,7 @@ What reviewers should expect:
       
     
 *   Later runs appear only after their training starts  
-      
-*   # **It is normal to**:  
-
-    *   **wait 5-10 minutes after launching TensorBoard**
-    *   **refresh TensorBoard (You SHOULD see the refresh button within the tensorboard portal itself)**
-    *   initially see metrics for only some runs
-    *   see sparse curves early in a run
+    
 # **Do not assume missing runs mean failure.**
 ## **All 8 runs will appear once their training begins and logs are written.**
 
@@ -26,7 +20,14 @@ What reviewers should expect:
 
 ### **Seeing only a few runs at first is expected.**
     
+*   # **It is normal to**:  
 
+    *   **wait 5-10 minutes after launching TensorBoard**
+    *   **refresh TensorBoard (You SHOULD see the refresh button within the tensorboard portal itself)**
+    *   initially see metrics for only some runs
+    *   see sparse curves early in a run
+
+    
 *   The final metrics table is extracted directly from TensorBoard event files and represents the authoritative comparison across all runs     
     
 * * *

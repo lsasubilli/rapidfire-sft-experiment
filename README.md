@@ -161,6 +161,59 @@ Key decisions:
 
 * * *
 
+---
+
+## Screenshots (what each image proves)
+
+### 1) TensorBoard — Train Loss across all 8 runs
+<img src="./screenshots/tensorboard_train_loss.png" width="950" />
+
+**What this shows**
+- All runs **learn** (loss decreases), but at different rates and final values.
+- **Run 2 and Run 4** converge to the **lowest training loss**, indicating stronger fit under identical step budgets.
+- Higher-final-loss runs (e.g., Runs 5/7) likely reflect weaker config choices for this tiny slice.
+
+---
+
+### 2) TensorBoard — Mean Token Accuracy across all 8 runs
+<img src="./screenshots/tensorboard_mean_token_accuracy.png" width="950" />
+
+**What this shows**
+- Mean token accuracy **rises steadily** for most runs → stable training signal (no collapse).
+- The ranking aligns with eval outcomes: **Run 2/4 are top**, Runs 5/7 are bottom.
+- This metric is useful as a fast, deterministic “training health” indicator when you’re avoiding LLM judges.
+
+---
+
+### 3) Results Table — Final metrics extracted from TensorBoard event files (authoritative)
+<img src="./screenshots/results_table.png" width="950" />
+
+**What this shows**
+- This table is extracted programmatically from event files → **no manual TensorBoard inspection required**.
+- It enables clean reporting + CSV export for comparisons.
+
+---
+
+### 4) Progress / “why do I only see some runs?” (Sequential logging is expected on free Colab)
+<img src="./screenshots/tensorboard_partial_runs.png" width="950" />
+
+**What this shows**
+- Runs appear **gradually** because configs execute **sequentially** on free-tier Colab.
+- Early on, TensorBoard may show only Runs 1–3; after more training completes and you refresh, you’ll see all 8.
+- The extracted metrics table (above) is the **final source of truth** once all runs finish.
+
+---
+
+### 5) Final comparison plots (optional, quick-glance)
+<img src="./screenshots/training_loss_all_configs.png" width="750" />
+<img src="./screenshots/eval_loss_all_configs.png" width="750" />
+
+**What this shows**
+- A compact “scoreboard” view of **final training vs eval loss** per run.
+- Helps reviewers see the winner without scrolling TensorBoard.
+
+---
+
 ## Metrics and Artifacts
 
 ### Metrics logged to TensorBoard

@@ -166,7 +166,7 @@ Key decisions:
 ## Screenshots (what each image proves)
 
 ### 1) TensorBoard — Train Loss across all 8 runs
-<img src="./screenshots/tensorboard_train_loss.png" width="950" />
+<img src="./screenshots/tensorboard_TRAIN_LOSS.png" width="950" />
 
 **What this shows**
 - All runs **learn** (loss decreases), but at different rates and final values.
@@ -176,7 +176,7 @@ Key decisions:
 ---
 
 ### 2) TensorBoard — Mean Token Accuracy across all 8 runs
-<img src="./screenshots/tensorboard_mean_token_accuracy.png" width="950" />
+<img src="./screenshots/tensorboard_MEAN_TOKEN_ACCURACY.png" width="950" />
 
 **What this shows**
 - Mean token accuracy **rises steadily** for most runs → stable training signal (no collapse).
@@ -186,7 +186,7 @@ Key decisions:
 ---
 
 ### 3) Results Table — Final metrics extracted from TensorBoard event files (authoritative)
-<img src="./screenshots/results_table.png" width="950" />
+<img src="./screenshots/metric_table.png" width="950" />
 
 **What this shows**
 - This table is extracted programmatically from event files → **no manual TensorBoard inspection required**.
@@ -194,17 +194,7 @@ Key decisions:
 
 ---
 
-### 4) Progress / “why do I only see some runs?” (Sequential logging is expected on free Colab)
-<img src="./screenshots/tensorboard_partial_runs.png" width="950" />
-
-**What this shows**
-- Runs appear **gradually** because configs execute **sequentially** on free-tier Colab.
-- Early on, TensorBoard may show only Runs 1–3; after more training completes and you refresh, you’ll see all 8.
-- The extracted metrics table (above) is the **final source of truth** once all runs finish.
-
----
-
-### 5) Final comparison plots (optional, quick-glance)
+### 4) Final comparison plots (optional, quick-glance)
 <img src="./screenshots/training_loss_all_configs.png" width="750" />
 <img src="./screenshots/eval_loss_all_configs.png" width="750" />
 

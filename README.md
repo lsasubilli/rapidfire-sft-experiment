@@ -167,6 +167,8 @@ Key decisions:
 
 ### 1) TensorBoard — Train Loss across all 8 runs
 <img src="./screenshots/tensorboard_TRAIN_LOSS.png" width="950" />
+### 2) TensorBoard — Loss across all 8 runs
+
 <img src="./screenshots/tensorboard_LOSS.png" width="950" />
 
 **What this shows**
@@ -176,7 +178,7 @@ Key decisions:
 
 ---
 
-### 2) TensorBoard — Mean Token Accuracy across all 8 runs
+### 3) TensorBoard — Mean Token Accuracy across all 8 runs
 <img src="./screenshots/tensorboard_MEAN_TOKEN_ACCURACY.png" width="950" />
 
 **What this shows**
@@ -186,7 +188,7 @@ Key decisions:
 
 ---
 
-### 3) Results Table — Final metrics extracted from TensorBoard event files (authoritative)
+### 4) Results Table — Final metrics extracted from TensorBoard event files (authoritative)
 <img src="./screenshots/metric_table.png" width="950" />
 
 **What this shows**
@@ -195,7 +197,7 @@ Key decisions:
 
 ---
 
-### 4) Final comparison plots
+### 5) Final comparison plots
 <img src="./screenshots/training_loss_all_configs.png" width="750" />
 <img src="./screenshots/eval_loss_all_configs.png" width="750" />
 

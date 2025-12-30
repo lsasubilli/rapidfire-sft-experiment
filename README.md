@@ -167,6 +167,7 @@ Key decisions:
 
 ### 1) TensorBoard — Train Loss across all 8 runs
 <img src="./screenshots/tensorboard_TRAIN_LOSS.png" width="950" />
+<img src="./screenshots/tensorboard_LOSS.png" width="950" />
 
 **What this shows**
 - All runs **learn** (loss decreases), but at different rates and final values.
@@ -194,7 +195,7 @@ Key decisions:
 
 ---
 
-### 4) Final comparison plots (optional, quick-glance)
+### 4) Final comparison plots
 <img src="./screenshots/training_loss_all_configs.png" width="750" />
 <img src="./screenshots/eval_loss_all_configs.png" width="750" />
 

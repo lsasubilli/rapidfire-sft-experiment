@@ -12,14 +12,12 @@ What reviewers should expect:
     
 *   Early runs appear first in TensorBoard; later runs appear after refresh  
       
-    
 *   It is normal to:  
-      
 
-*   refresh TensorBoard during or after training  
-      
-    
-*   see additional runs appear progressively  
+    *   refresh TensorBoard during or after training  
+    *   see additional runs appear progressively  
+    *   observe sparse or delayed metrics early in a run until logging steps are reached
+
       
     
 
